@@ -3,14 +3,14 @@ import "package:bytequest/screen/signup_screen.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();

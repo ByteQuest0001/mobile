@@ -1,5 +1,5 @@
 import 'package:bytequest/helper/global.dart';
-import 'package:bytequest/screen/home_screen.dart';
+import 'package:bytequest/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -148,7 +148,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                          builder: (context) => const LoginScreen()));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey.shade300,
