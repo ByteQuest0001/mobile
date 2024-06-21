@@ -1,4 +1,5 @@
 import "package:bytequest/helper/global.dart";
+import "package:bytequest/screen/signup_screen.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
@@ -117,6 +118,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ElevatedButton(
                   onPressed: () {
                     // sign up
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignupScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
