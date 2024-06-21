@@ -18,6 +18,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  # Native Splash Screen
+  flutter_native_splash: ^2.4.0
+
   # Good Practices
   flutter_lints: ^3.0.0
 
