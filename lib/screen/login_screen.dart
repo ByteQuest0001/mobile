@@ -1,5 +1,5 @@
+import "package:bytequest/controller/login_controller.dart";
 import "package:bytequest/helper/global.dart";
-import "package:bytequest/screen/home_screen.dart";
 import "package:bytequest/screen/signup_screen.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -12,6 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final LoginController _loginController = LoginController();
+
   @override
   void initState() {
     super.initState();
@@ -100,13 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 ElevatedButton(
-                  onPressed: () {
-                    // login
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
-                  },
+                  onPressed: () => _loginController.login(context),
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       minimumSize: Size(mq.width, 50)),

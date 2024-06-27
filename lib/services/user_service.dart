@@ -23,4 +23,16 @@ class UserService {
 
     return await http.post(url, headers: headers, body: body);
   }
+
+  static Future<http.Response> login(
+      {required String username, required String password}) {
+    final url = Uri.parse(endpoint);
+    return http.post(
+      url,
+      body: {
+        'username': username,
+        'password': password,
+      },
+    );
+  }
 }
