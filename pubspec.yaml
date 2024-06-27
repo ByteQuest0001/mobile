@@ -27,6 +27,9 @@ dev_dependencies:
   # Changing App Icon
   icons_launcher: ^2.1.7
 
+  # HTTP requests
+  http: ^1.2.1
+
 flutter:
   uses-material-design: true
 
