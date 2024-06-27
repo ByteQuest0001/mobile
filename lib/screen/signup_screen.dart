@@ -1,3 +1,4 @@
+import 'package:bytequest/controller/signup_controller.dart';
 import 'package:bytequest/helper/global.dart';
 import 'package:bytequest/screen/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final SignupController _signupController = SignupController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,9 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
               // signup button
               ElevatedButton(
-                onPressed: () {
-                  // login
-                },
+                onPressed: () => _signupController.signup(context),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     minimumSize: Size(mq.width, 50)),
