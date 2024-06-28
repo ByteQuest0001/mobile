@@ -1,4 +1,5 @@
 import 'package:bytequest/helper/global.dart';
+import 'package:bytequest/screen/edit_user_screen.dart';
 import 'package:bytequest/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -98,7 +99,14 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 height: mq.height * .05,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditUserScreen(),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(),
                 child: const Text(
                   'Edit Profile',
