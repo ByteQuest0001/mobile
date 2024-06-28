@@ -1,13 +1,35 @@
+import 'package:bytequest/controller/achievement_controller.dart';
 import 'package:bytequest/helper/global.dart';
 import 'package:bytequest/model/achievement_model.dart';
-import 'package:bytequest/screen/achievements_screen.dart';
+import 'package:bytequest/screen/edit_achievement_screen.dart';
 import 'package:bytequest/screen/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
-class AchievementDetailScreen extends StatelessWidget {
+class AchievementDetailScreen extends StatefulWidget {
   final Achievement achievement;
+  final int index;
+  final AchievementController controller;
 
-  const AchievementDetailScreen({super.key, required this.achievement});
+  const AchievementDetailScreen({
+    super.key,
+    required this.achievement,
+    required this.index,
+    required this.controller,
+  });
+
+  @override
+  State<AchievementDetailScreen> createState() =>
+      _AchievementDetailScreenState();
+}
+
+class _AchievementDetailScreenState extends State<AchievementDetailScreen> {
+  late Achievement achievement;
+
+  @override
+  void initState() {
+    super.initState();
+    achievement = widget.achievement;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +50,7 @@ class AchievementDetailScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AchievementsScreen(),
-                        ),
-                      );
+                      Navigator.pop(context);
                     },
                     icon: const Icon(Icons.arrow_back),
                     color: Colors.white,
@@ -60,6 +77,33 @@ class AchievementDetailScreen extends StatelessWidget {
               // spacing
               const SizedBox(
                 height: 50,
+              ),
+
+              // edit button
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: const Icon(Icons.edit),
+                  color: Colors.white,
+                  onPressed: () async {
+                    final updatedAchievement = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditAchievementScreen(
+                          achievement: achievement,
+                          index: widget.index,
+                          controller: widget.controller,
+                        ),
+                      ),
+                    );
+
+                    if (updatedAchievement != null) {
+                      setState(() {
+                        achievement = updatedAchievement;
+                      });
+                    }
+                  },
+                ),
               ),
 
               // name
@@ -166,8 +210,6 @@ class AchievementDetailScreen extends StatelessWidget {
                 ],
               ),
 
-              // date
-
               // spacing
               const SizedBox(height: 40),
 
@@ -177,7 +219,7 @@ class AchievementDetailScreen extends StatelessWidget {
                 children: [
                   const Text(
                     'Category: ',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 26,
                       color: Colors.white,
                     ),

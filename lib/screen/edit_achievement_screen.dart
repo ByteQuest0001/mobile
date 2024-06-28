@@ -57,7 +57,7 @@ class _EditAchievementScreenState extends State<EditAchievementScreen> {
       category: _categoryController.text,
     );
     widget.controller.editAchievement(widget.index, updatedAchievement);
-    Navigator.pop(context);
+    Navigator.pop(context, updatedAchievement);
   }
 
   @override

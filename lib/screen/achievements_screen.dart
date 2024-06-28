@@ -142,9 +142,16 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => AchievementDetailScreen(
-                                achievement: achievement),
+                              achievement: achievement,
+                              index: index,
+                              controller: achievementController,
+                            ),
                           ),
-                        );
+                        ).then((value) {
+                          if (value != null) {
+                            setState(() {});
+                          }
+                        });
                       },
 
                       // achievement display
@@ -192,7 +199,11 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                         controller: achievementController,
                                       ),
                                     ),
-                                  );
+                                  ).then((value) {
+                                    if (value != null) {
+                                      setState(() {});
+                                    }
+                                  });
                                 },
                                 icon: const Icon(Icons.edit),
                                 color: Colors.white,
