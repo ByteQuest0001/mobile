@@ -1,6 +1,8 @@
+import 'package:bytequest/controller/achievement_controller.dart';
 import 'package:bytequest/helper/global.dart';
 import 'package:bytequest/model/achievement_model.dart';
 import 'package:bytequest/screen/achievement_details_screen.dart';
+import 'package:bytequest/screen/edit_achievement_screen.dart';
 import 'package:bytequest/screen/home_screen.dart';
 import 'package:bytequest/screen/user_profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,51 +15,48 @@ class AchievementsScreen extends StatefulWidget {
 }
 
 class _AchievementsScreenState extends State<AchievementsScreen> {
+  final List<Achievement> achievements = [
+    Achievement(
+      name: 'Flutter Wizard',
+      description: 'Completed Flutter Mobile App for UniBH Project',
+      date: '28/06/2024',
+      situation: 'Completed',
+      category: 'Academic',
+    ),
+    Achievement(
+      name: 'Springboot Specialist',
+      description: 'Completed Springboot Backend for UniBH Project',
+      date: '28/06/2024',
+      situation: 'Completed',
+      category: 'Academic',
+    ),
+    Achievement(
+      name: 'AWS Master - DynamoDB Stance',
+      description: 'Completed DynamoDB database for UniBH Project',
+      date: '28/06/2024',
+      situation: 'Completed',
+      category: 'Academic',
+    ),
+    Achievement(
+      name: 'JavaScript Sorcerer',
+      description: 'Discovered the deep secrets of JavaScript sorcery',
+      date: '14/05/2022',
+      situation: 'Ongoing',
+      category: 'Academic',
+    ),
+  ];
+
+  late AchievementController achievementController;
+
+  @override
+  void initState() {
+    super.initState();
+    achievementController = AchievementController(achievements);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Initializing device size
     mq = MediaQuery.sizeOf(context);
-
-    // dummy list
-    // final List<String> achievements = [
-    //   'Flutter Wizard'
-    //   'SpringBoot Specialist',
-    //   'PHP Master',
-    //   'JavaScript Sorcerer',
-    //   'Java Knight'
-    //   'Python Enthusiast',
-    // ];
-
-    final List<Achievement> achievements = [
-      Achievement(
-        name: 'Flutter Wizard',
-        description: 'Completed Flutter Mobile App for UniBH Project',
-        date: '28/06/2024',
-        situation: 'Completed',
-        category: 'Academic',
-      ),
-      Achievement(
-        name: 'Springboot Specialist',
-        description: 'Completed Springboot Backend for UniBH Project',
-        date: '28/06/2024',
-        situation: 'Completed',
-        category: 'Academic',
-      ),
-      Achievement(
-        name: 'AWS Master - DynamoDB Stance',
-        description: 'Completed DynamoDB database for UniBH Project',
-        date: '28/06/2024',
-        situation: 'Completed',
-        category: 'Academic',
-      ),
-      Achievement(
-        name: 'JavaScript Sorcerer',
-        description: 'Discovered the deep secrets of JavaScript sorcery',
-        date: '14/05/2022',
-        situation: 'Ongoing',
-        category: 'Academic',
-      ),
-    ];
 
     return Scaffold(
       backgroundColor: const Color(0xFF1A0047),
@@ -183,7 +182,17 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  // edit
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditAchievementScreen(
+                                        achievement: achievement,
+                                        index: index,
+                                        controller: achievementController,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 icon: const Icon(Icons.edit),
                                 color: Colors.white,
