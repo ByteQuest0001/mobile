@@ -9,5 +9,9 @@ class AchievementController {
     _achievements[index] = updatedAchievement;
   }
 
+  void addAchievement(Achievement newAchievement) {
+    _achievements.add(newAchievement);
+  }
+
   List<Achievement> get achievements => _achievements;
 }

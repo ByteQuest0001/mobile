@@ -1,17 +1,16 @@
-import 'package:bytequest/controller/achievement_controller.dart';
-import 'package:bytequest/helper/global.dart';
-import 'package:bytequest/model/achievement_model.dart';
 import 'package:bytequest/screen/achievement_details_screen.dart';
-import 'package:bytequest/screen/edit_achievement_screen.dart';
 import 'package:bytequest/screen/home_screen.dart';
-import 'package:bytequest/screen/user_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:bytequest/controller/achievement_controller.dart';
+import 'package:bytequest/model/achievement_model.dart';
+import 'package:bytequest/screen/edit_achievement_screen.dart';
+import 'package:bytequest/screen/user_profile_screen.dart';
 
 class AchievementsScreen extends StatefulWidget {
-  const AchievementsScreen({super.key});
+  const AchievementsScreen({Key? key}) : super(key: key);
 
   @override
-  State<AchievementsScreen> createState() => _AchievementsScreenState();
+  _AchievementsScreenState createState() => _AchievementsScreenState();
 }
 
 class _AchievementsScreenState extends State<AchievementsScreen> {
@@ -54,10 +53,14 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
     achievementController = AchievementController(achievements);
   }
 
+  void addAchievement(Achievement newAchievement) {
+    setState(() {
+      achievementController.addAchievement(newAchievement);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.sizeOf(context);
-
     return Scaffold(
       backgroundColor: const Color(0xFF1A0047),
       body: SingleChildScrollView(
@@ -103,7 +106,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
               // spacing
               SizedBox(
-                height: mq.height * .05,
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
 
               Row(
@@ -119,7 +122,29 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
                   // Add Achievement Icon
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditAchievementScreen(
+                            achievement: Achievement(
+                              name: '',
+                              description: '',
+                              date:
+                                  '', // You might want to initialize with default values or null
+                              situation: '',
+                              category: '',
+                            ),
+                            index: -1,
+                            controller: achievementController,
+                          ),
+                        ),
+                      ).then((newAchievement) {
+                        if (newAchievement != null) {
+                          addAchievement(newAchievement);
+                        }
+                      });
+                    },
                     icon: const Icon(Icons.add_circle_outlined),
                     color: Colors.white,
                     iconSize: 35,
@@ -149,12 +174,12 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                           ),
                         ).then((value) {
                           if (value != null) {
-                            setState(() {});
+                            setState(() {
+                              achievements[index] = value;
+                            });
                           }
                         });
                       },
-
-                      // achievement display
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -201,7 +226,9 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                     ),
                                   ).then((value) {
                                     if (value != null) {
-                                      setState(() {});
+                                      setState(() {
+                                        achievements[index] = value;
+                                      });
                                     }
                                   });
                                 },
@@ -209,13 +236,13 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
                                 color: Colors.white,
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
                   );
                 },
-              )
+              ),
             ],
           ),
         ),

@@ -5,23 +5,21 @@ import 'package:flutter/material.dart';
 import '../model/achievement_model.dart';
 import '../controller/achievement_controller.dart';
 
-class EditAchievementScreen extends StatefulWidget {
-  final Achievement achievement;
-  final int index;
+class AddAchievementScreen extends StatefulWidget {
+  final List<Achievement> achievements;
   final AchievementController controller;
 
-  const EditAchievementScreen({
-    super.key,
-    required this.achievement,
-    required this.index,
+  const AddAchievementScreen({
+    Key? key,
+    required this.achievements,
     required this.controller,
-  });
+  }) : super(key: key);
 
   @override
-  _EditAchievementScreenState createState() => _EditAchievementScreenState();
+  _AddAchievementScreenState createState() => _AddAchievementScreenState();
 }
 
-class _EditAchievementScreenState extends State<EditAchievementScreen> {
+class _AddAchievementScreenState extends State<AddAchievementScreen> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
   late TextEditingController _dateController;
@@ -31,14 +29,11 @@ class _EditAchievementScreenState extends State<EditAchievementScreen> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: widget.achievement.name);
-    _descriptionController =
-        TextEditingController(text: widget.achievement.description);
-    _dateController = TextEditingController(text: widget.achievement.date);
-    _situationController =
-        TextEditingController(text: widget.achievement.situation);
-    _categoryController =
-        TextEditingController(text: widget.achievement.category);
+    _nameController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _dateController = TextEditingController();
+    _situationController = TextEditingController();
+    _categoryController = TextEditingController();
   }
 
   @override
@@ -52,22 +47,16 @@ class _EditAchievementScreenState extends State<EditAchievementScreen> {
   }
 
   void _saveAchievement() {
-    final updatedAchievement = Achievement(
+    final newAchievement = Achievement(
       name: _nameController.text,
       description: _descriptionController.text,
       date: _dateController.text,
       situation: _situationController.text,
       category: _categoryController.text,
     );
-    if (widget.index == -1) {
-      // Adding new achievement
-      widget.controller.addAchievement(updatedAchievement);
-    } else {
-      // Editing existing achievement
-      widget.controller.editAchievement(widget.index, updatedAchievement);
-    }
 
-    Navigator.pop(context, updatedAchievement);
+    widget.controller.addAchievement(newAchievement);
+    Navigator.pop(context, newAchievement);
   }
 
   @override
