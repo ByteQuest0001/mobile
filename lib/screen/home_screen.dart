@@ -1,3 +1,4 @@
+import 'package:bytequest/screen/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,7 +39,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Column(
                       children: [
-                        Image.asset('assets/images/user-profile-icon.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const UserProfileScreen(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                              'assets/images/user-profile-icon.png'),
+                        ),
                         const SizedBox(
                           height: 8.0,
                         ),
