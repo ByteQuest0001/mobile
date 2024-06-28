@@ -30,7 +30,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
 
     final List<Achievement> achievements = [
       Achievement(
-        name: 'Flutter Wizrd',
+        name: 'Flutter Wizard',
         description: 'Completed Flutter Mobile App for UniBH Project',
         date: '28/06/2024',
         situation: 'Completed',
