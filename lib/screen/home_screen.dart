@@ -1,3 +1,4 @@
+import 'package:bytequest/screen/achievements_screen.dart';
 import 'package:bytequest/screen/user_profile_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+
+                // Spacing
+                const SizedBox(
+                  height: 56.0,
+                ),
+
+                // User Profile
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -65,38 +73,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+
+                // Achievements
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       children: [
-                        Image.asset('assets/images/achievements-icon.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const AchievementsScreen(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                              'assets/images/achievements-icon.png'),
+                        ),
                         const SizedBox(
                           height: 8.0,
                         ),
                         const Text(
-                          'User Profile',
+                          'Achievements',
                           style: TextStyle(color: Colors.white, fontSize: 30.0),
                         ),
                         const SizedBox(
                           height: 30.0,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Image.asset('assets/images/dashboards-icon.png'),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        const Text(
-                          'User Profile',
-                          style: TextStyle(color: Colors.white, fontSize: 30.0),
                         ),
                       ],
                     ),
